@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(75, 0, 130);
+}
+.scroll-block {height: 400px;width: 50%;background: whitesmoke;overflow-y: scroll;border:1px solid;}
+.scroll-block::-webkit-scrollbar-track {border-radius: 4px;}
+.scroll-block::-webkit-scrollbar {width: 6px;}
+.scroll-block::-webkit-scrollbar-thumb {border-radius: 4px;background: #f0f2f5;}
+.scroll-block:hover::-webkit-scrollbar-thumb {background: #6a7d9b;}
+div {
+    overflow: auto;
+    white-space: pre-wrap;
+    border: 2px solid;
+    background: rgb(173, 158, 158);
+    border: 2px solid;
+    border-color: rgb(32, 178, 170);
+    border-radius: 20px;
+    padding: 10px;
+    width: 50%;
+    height: 400px;
+}
+
+button {
+ border: 1px solid;
+ border-radius: 10px;
+ background-color: white;
+ border-color: rgb(32, 178, 170);
+ color: rgb(32, 178, 170)
+}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Моя страница</title>
+
+</head>
+<style>
+    output_field {
+    color: green;
+    }
+</style>
+<body>
+    <textarea class="scroll-block" placeholder="  Введите сюда свой текст..." id="input_field" name="text_user" cols="80" rows="37" style="border: 2px solid; border-radius: 20px; padding: 10px"></textarea>
+
+
+    <div id="output_field" class="scroll-block" style="display: none;">  </div>
+    <br>
+    <button style="display: none;" id="button_translate" onclick="clicked_on_button_translate()">Translate</button>
+    <br>
+    <button style="display: none;" id="button_back" onclick="clicked_on_button_back()">Back</button>
+    <button style="display: none;" id="button_new_convert" onclick="create_button_words()">Converting new file</button>
+    <br>
+    <button id="button_splitting" onclick=create_button_words() clicked="No">Converting</button>
+    <script>
+
+
+function clicked_on_button_translate () {
+    alert("~~Translate Words~~")
+}
+function change_color_button (button_id) {
+    if (button_id.getAttribute('color') == 'white') {
+    button_id.style.background = 'red'
+    button_id.setAttribute('color', 'red')
+    } else {
+    button_id.style.background = 'none'
+    button_id.setAttribute('color', 'white')
+    }
+}
+
+function delete_old_words () {
+    let arr = document.querySelectorAll('div > span')
+    for (let i = 0; i < arr.length; i++) {
+    arr[i].remove()
+}
+}
+function check_word_in_new_array (saved_words, new_word) {
+    if (word in saved_words) {return true}
+    else {return false}
+}
+function clicked_on_button_back (){
+    output_field.setAttribute('style', "display: none;")
+    input_field.setAttribute('style', "display: block;")
+
+    button_translate.setAttribute('style', "display: none;")
+    button_splitting.setAttribute('style', "display: block;")
+    button_back.setAttribute('style', "display: none;")
+    button_new_convert.setAttribute('style', "display: block;")
+}
+function save_special_word () {
+    let saved_words = []
+    let arr = document.querySelectorAll('div > span')
+    for (let i = 0; i < arr.length; i++) {
+    if (arr[i].getAttribute('color') == 'red') {saved_words.push(arr[i].textContent)}
+}
+    alert(arr[0])
+}
+
+function create_button_words () {
+    delete_old_words()
+    if (button_splitting.getAttribute('clicked')=='No') {
+        button_splitting.setAttribute('clicked', "Yes")
+    var output_field = document.getElementById("output_field")
+    var text_input_words = document.getElementById('input_field').value;
+    let arr_input_words= text_input_words.split( "\n" ).join( " " ).split( " " )
+
+    output_field.setAttribute('style', "display: block;")
+    input_field.setAttribute('style', "display: none;")
+
+    button_translate.setAttribute('style', "display: block;")
+    button_splitting.setAttribute('style', "display: none;")
+    button_back.setAttribute('style', "display: block;")
+    button_new_convert.setAttribute('style', "display: none;")
+
+    for (let i = 0; i < arr_input_words.length; i++) {
+    elem = document.createElement("span")
+    elem.setAttribute('onclick', 'change_color_button(this)')
+    elem.setAttribute('id', arr_input_words[i])
+
+    elem.setAttribute('color', 'white')
+  elemText = document.createTextNode(arr_input_words[i] + ' ')
+  elem.appendChild(elemText)
+
+  output_field.appendChild(elem)
+}
+    } else {
+        let saved_words = save_special_word()
+        var output_field = document.getElementById("output_field")
+    var text_input_words = document.getElementById('input_field').value;
+    let arr_input_words= text_input_words.split( "\n" ).join( " " ).split( " " )
+
+    output_field.setAttribute('style', "display: block;")
+    input_field.setAttribute('style', "display: none;")
+
+    button_translate.setAttribute('style', "display: block;")
+    button_splitting.setAttribute('style', "display: none;")
+    button_back.setAttribute('style', "display: block;")
+    button_new_convert.setAttribute('style', "display: none;")
+
+    for (let i = 0; i < arr_input_words.length; i++) {
+    elem = document.createElement("span")
+    elem.setAttribute('onclick', 'change_color_button(this)')
+    elem.setAttribute('id', arr_input_words[i])
+
+    if (saved_words.includes(arr_input_words[i])) {elem.setAttribute('color', 'red')}
+    else {elem.setAttribute('color', 'white')}
+  elemText = document.createTextNode(arr_input_words[i] + ' ')
+  elem.appendChild(elemText)
+
+  output_field.appendChild(elem)}}
+
+
+}
+</script>
+</body>
+</html>
+
